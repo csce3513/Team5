@@ -1,18 +1,4 @@
-Unlike Flash Builder, Flash Professional does not natively support FlexUnit.  As such, it is necessary to build a little test application of sorts.
-
-The test application loads classes from the actual application (through the other application exporting a .swc file) and then tests them.
-
-The basic idea behind setting up the test appliation is:
-
-- Download http://flexunit.org/releases/flexunit-4.1.0-8-4.1.0.16076.zip
-- Extract it somewhere (the file of interest is flexunit-4.1.0-8-as3_4.1.0.16076.swc)
-
 - Open the project in Flash
 - If prompted, choose to pick a new project root. Choose the testing folder (the folder this file is in) as the root.
-- Open the fla file and make sure it is in focus
-- Go to File -> Publish Settings
-- Go to the Flash tab, and then click on Settings next to the "Script" drop down.
-- Click on the library tab
-- Click the plus button to add a new entry
-- Click on the red "Browse to SWC" button
-- Add the flexunit swc (flexunit-4.1.0-8-as3_4.1.0.16076.swc)
+- Right click on the fla file and click "Make Default Document"
+- Click "Test Project" (or if that option doesn't show up, open the fla file, then choose the control option at the top of the window and then Test)
