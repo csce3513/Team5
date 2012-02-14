@@ -14,7 +14,8 @@
 			//Completely pointless test, but...
 			//Just an example :)
 			var user:User = new User();
-			Assert.assertTrue(true);
+			user.setName("name");
+			Assert.assertTrue(user.getName() == "name");
 		}
 	
 	}
