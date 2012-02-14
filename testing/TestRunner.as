@@ -3,7 +3,7 @@
 	import flash.display.MovieClip;
 	import org.flexunit.internals.TraceListener;
 	import org.flexunit.runner.FlexUnitCore;
-	import tests.ExampleTests;
+	import tests.UserTests;
 	
 	public class TestRunner extends flash.display.MovieClip
 	{
@@ -14,7 +14,7 @@
 			var traceListener:TraceListener = new TraceListener();
 			var flexUnitCore:FlexUnitCore = new FlexUnitCore();
 			flexUnitCore.addListener(traceListener);
-			flexUnitCore.run(tests.ExampleTests);
+			flexUnitCore.run(tests.UserTests);
 		}
 	
 	}
