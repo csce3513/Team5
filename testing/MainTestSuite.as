@@ -9,6 +9,8 @@
 	{
 	
 		public var userTests : UserTests;
+		public var multiplierTests : MultiplierTests;
+		//public var <something>Tests : <SOME TEST CLASS>;
 		
 	}
 	

@@ -3,6 +3,8 @@
 	import flash.display.Sprite;
 	
 	import gog.User;
+	import gog.ClassA;
+	import gog.Multiplier;
 	
 	public class the_game extends Sprite
 	{
@@ -12,6 +14,8 @@
 		//but for unit testing it's a bit of a pain...
 		//(This is here just so gog.User is exported in the swc)
 		private var dummy:User;
+		private var dummy2:ClassA;
+		private var dummy3:Multiplier;
 		
 		public var splash_screen:splash;
 		public var play_screen:the_game_itself;

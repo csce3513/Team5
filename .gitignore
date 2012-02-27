@@ -1,7 +1,3 @@
-
-/.flashProjectProperties
-/gog/.flashProjectProperties
-/gog/gog.airi
-/testing/TestRunner.airi
-/gog/gog.swc
-/gog/gog.swf
+*.swc
+*.swf
+.flashProjectProperties
