@@ -5,6 +5,8 @@
 	import gog.User;
 	import gog.ClassA;
 	import gog.Multiplier;
+	import gog.UserManager;
+	import flash.filesystem.*;
 	
 	public class the_game extends Sprite
 	{
@@ -16,6 +18,7 @@
 		private var dummy:User;
 		private var dummy2:ClassA;
 		private var dummy3:Multiplier;
+		private var dummy4:UserManager;
 		
 		public var splash_screen:splash;
 		public var play_screen:the_game_itself;
