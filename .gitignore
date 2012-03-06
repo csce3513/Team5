@@ -1,3 +1,4 @@
 *.swc
 *.swf
 .flashProjectProperties
+/gog/gog.exe

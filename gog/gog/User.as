@@ -4,7 +4,7 @@
 	public class User
 	{
 		
-		private var _name:String;
+		private var _name : String;
 		private var _level : int;
 		
 		public function User()

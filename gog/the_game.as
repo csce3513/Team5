@@ -18,7 +18,8 @@
 		private var dummy:User;
 		private var dummy2:ClassA;
 		private var dummy3:Multiplier;
-		private var dummy4:UserManager;
+		
+		private var userManager:UserManager;
 		
 		public var splash_screen:splash;
 		public var play_screen:the_game_itself;
@@ -28,12 +29,19 @@
 		public var congratz_screen:game_won;
 		public function the_game()
 		{
+			
+			this.userManager = new UserManager(File.applicationStorageDirectory.resolvePath("users"));
 			show_splash();
 		}
+		
+		public function getUserManager() : UserManager
+		{
+			return this.userManager;
+		}
+		
 		public function show_splash()
 		{
 			splash_screen = new splash(this);
-			remove_how_to_play();
 			addChild(splash_screen);// check child is added
 		}
 		public function show_how_to_play()
