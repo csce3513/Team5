@@ -36,7 +36,9 @@
 			ballVelocityY = 0;
 			_gameOver = false;
 			
-			addEventListener(Event.ADDED_TO_STAGE, build);
+			if (stage) {
+				addEventListener(Event.ADDED_TO_STAGE, build);
+			}
 			
 		}
 		
@@ -106,25 +108,44 @@
 		{
 			_gameOver = true;
 			ballVelocityY = ballVelocityX = 0;
-			addChild(_startText);
-			_startText.text = 'Game Over!';
+			if (_startText) {
+				addChild(_startText);
+				_startText.text = 'Game Over!';
+			}
 			
-			_paddle.removeEventListener(Event.ENTER_FRAME, movePaddle);
-			_ball.removeEventListener(Event.ENTER_FRAME, moveBall);
+			if (_paddle) {
+				_paddle.removeEventListener(Event.ENTER_FRAME, movePaddle);
+			}
+			if (_ball) {
+				_ball.removeEventListener(Event.ENTER_FRAME, moveBall);
+			}
 		}
 		
 		public function bounceOnPaddle() : void
 		{
+			
+			var ballPosition:Number;
+			
 			//calculates where ball impacts the paddle
-			var ballPosition:Number = _ball.x - _paddle.x;
+			if (_ball && _paddle) {
+				ballPosition = _ball.x - _paddle.x;
+			} else {
+				ballPosition = 0;
+			}
 			
 			//hitPercent converts ballPosition into a percent
 			//All the way to the left is -.5
 			//All the way to the right is .5
 			//The center is 0
 			
-			var dw = _paddle.width - _ball.width;
-			if (dw == 0) {
+			var dw;
+			
+			if (_ball && _paddle) {
+				dw = _paddle.width - _ball.width;
+				if (dw == 0) {
+					dw = 1;
+				}
+			} else {
 				dw = 1;
 			}
 			
@@ -137,14 +158,16 @@
 			_ballVelocityY *= -1.1;
 			++_score;
 			
-			_scoreText.text = String(_score);
-			var format:TextFormat = new TextFormat(); 
-			format.color = 0xffffff;
-			format.size = 30;
-			_scoreText.autoSize = TextFieldAutoSize.LEFT;
-			_scoreText.y = 10;
-			_scoreText.x = stage.stageWidth - _scoreText.width - 15;
-			_scoreText.setTextFormat(format);
+			if (_scoreText) {
+				_scoreText.text = String(_score);
+				var format:TextFormat = new TextFormat(); 
+				format.color = 0xffffff;
+				format.size = 30;
+				_scoreText.autoSize = TextFieldAutoSize.LEFT;
+				_scoreText.y = 10;
+				_scoreText.x = stage.stageWidth - _scoreText.width - 15;
+				_scoreText.setTextFormat(format);
+			}
 			
 		}
 		
