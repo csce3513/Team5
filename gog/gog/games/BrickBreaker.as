@@ -2,14 +2,24 @@
 {
 	
 	import flash.display.Sprite;
+	import gog.shapes.Circle;
+	import flash.text.TextField;
+	import flash.text.TextFieldAutoSize;
+	import flash.text.TextFormat;
+	import flash.events.Event;
+	import flash.events.MouseEvent;
+	import flash.geom.Rectangle;
 	
-	public class BrickBreaker
+	public class BrickBreaker extends Sprite
 	{
 		
 		private var _score:int;
 		private var _ballVelocityX:Number;
 		private var _ballVelocityY:Number;
 		private var _gameOver:Boolean;
+		
+		private var _startText:TextField;
+		private var _scoreText:TextField;
 		
 		private var _ball:Sprite;
 		private var _paddle:Sprite;
@@ -26,8 +36,7 @@
 			ballVelocityY = 0;
 			_gameOver = false;
 			
-			_ball = new Sprite();
-			_paddle = new Sprite();
+			addEventListener(Event.ADDED_TO_STAGE, build);
 			
 		}
 		
@@ -79,8 +88,14 @@
 					ballVelocityY *= -1;
 					break;
 				case WALL_RIGHT:
+					if (ballVelocityX > 0) {
+						ballVelocityX *= -1;
+					}
+					break;
 				case WALL_LEFT:
-					ballVelocityX *= -1;
+					if (ballVelocityX < 0) {
+						ballVelocityX *= -1;
+					}
 					break;
 				default:
 					endGame();
@@ -90,6 +105,12 @@
 		public function endGame() : void
 		{
 			_gameOver = true;
+			ballVelocityY = ballVelocityX = 0;
+			addChild(_startText);
+			_startText.text = 'Game Over!';
+			
+			_paddle.removeEventListener(Event.ENTER_FRAME, movePaddle);
+			_ball.removeEventListener(Event.ENTER_FRAME, moveBall);
 		}
 		
 		public function bounceOnPaddle() : void
@@ -115,7 +136,122 @@
 			//Inverts y speed to bounce up and increases speed
 			_ballVelocityY *= -1.1;
 			++_score;
+			
+			_scoreText.text = String(_score);
+			var format:TextFormat = new TextFormat(); 
+			format.color = 0xffffff;
+			format.size = 30;
+			_scoreText.autoSize = TextFieldAutoSize.LEFT;
+			_scoreText.y = 10;
+			_scoreText.x = stage.stageWidth - _scoreText.width - 15;
+			_scoreText.setTextFormat(format);
+			
 		}
+		
+		protected function build(evt:Event) : void
+		{
+			_paddle = new Sprite();
+			addChild(_paddle);
+			_paddle.graphics.beginFill(0xFFFFFF);
+			_paddle.graphics.drawRect(0, 0, 80, 15);
+			_paddle.graphics.endFill();
+			_paddle.x = (stage.stageWidth - _paddle.width) / 2;
+			_paddle.y = stage.stageHeight - _paddle.height - 20;
+				
+			_startText = new TextField();
+			_startText.text = "Click here to start";
+			var format:TextFormat = new TextFormat(); 
+			format.color = 0xffffff;
+			format.size = 30;
+			_startText.autoSize = TextFieldAutoSize.CENTER;
+			_startText.setTextFormat(format);
+			_startText.x = (stage.stageWidth - _startText.width) / 2;
+			_startText.y = (stage.stageHeight - _startText.height) / 2;
+			
+			_startText.addEventListener(MouseEvent.CLICK, startGame);
+			
+			addChild(_startText);
+			addChild(_paddle);
+			
+			_scoreText = new TextField();
+			
+			_scoreText.text = '0';
+			_scoreText.autoSize = TextFieldAutoSize.LEFT;
+			_scoreText.y = 10;
+			_scoreText.x = stage.stageWidth - _scoreText.width - 15;
+			_scoreText.setTextFormat(format);
+			
+			addChild(_scoreText);
+			
+		}
+		
+		protected function startGame(evt:MouseEvent)
+		{
+			_startText.removeEventListener(MouseEvent.CLICK, startGame);
+			removeChild(_startText);
+			
+			_ball = new Circle(5, 0xffffff);
+			addChild(_ball);
+			_ball.x = (stage.stageWidth - _ball.width) / 2;
+			_ball.y = 10;
+			
+			_paddle.addEventListener(Event.ENTER_FRAME, movePaddle);
+			
+			ballVelocityX = 0;
+			ballVelocityY = 8;
+			
+			_ball.addEventListener(Event.ENTER_FRAME, moveBall);
+			
+		}
+		
+		protected function movePaddle(event:Event):void{
+	
+			//centers paddle on mouse
+			_paddle.x = mouseX - _paddle.width / 2;
+			
+			//creates left and right bound for paddle on stage
+			if(mouseX < _paddle.width / 2){
+				_paddle.x = 0;
+			}
+			
+			if(mouseX > stage.stageWidth - _paddle.width / 2){
+				
+				_paddle.x = stage.stageWidth - _paddle.width;
+			}
+		}
+		
+		protected function moveBall(event:Event):void{
+			//changes position of ball using speed variable
+			_ball.x += _ballVelocityX;
+			_ball.y += _ballVelocityY; 
+			
+			
+			if(_ball.x >= stage.stageWidth-_ball.width){
+				bounceOnWall(WALL_RIGHT);
+			} else if(_ball.x <= 0){
+				bounceOnWall(WALL_LEFT);
+			} else if(_ball.y <= 0){
+				bounceOnWall(WALL_TOP);
+			} else if(_ball.y >= stage.stageHeight-_ball.height){
+				
+				//stop ball if it hits the bottom
+				
+				bounceOnWall(WALL_BOTTOM);
+				
+				//_ballVelocityY = 0;
+				//_ballVelocityX = 0;
+				//_gameOver = true; 
+				//_paddle.removeEventListener(Event.ENTER_FRAME, movePaddle);
+				
+			}
+			
+			
+			//Call function for bounce if ball hits paddle
+			if(_ball.hitTestObject(_paddle)){
+				bounceOnPaddle();
+			}
+		}
+		
 		
 	}
 	

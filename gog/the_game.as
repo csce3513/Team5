@@ -1,6 +1,7 @@
 ﻿package 
 {
 	import flash.display.Sprite;
+	import flash.display.MovieClip;
 	
 	import flash.filesystem.*;
 	import gog.User;
@@ -131,5 +132,6 @@
 				congratz_screen = null;
 			}
 		}
+		
 	}
 }
