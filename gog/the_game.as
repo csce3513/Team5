@@ -2,11 +2,12 @@
 {
 	import flash.display.Sprite;
 	
+	import flash.filesystem.*;
 	import gog.User;
 	import gog.ClassA;
 	import gog.Multiplier;
 	import gog.UserManager;
-	import flash.filesystem.*;
+	import gog.games.BrickBreaker;
 	
 	public class the_game extends Sprite
 	{
@@ -15,9 +16,10 @@
 		//then don't export it.  That's all fine and well,
 		//but for unit testing it's a bit of a pain...
 		//(This is here just so gog.User is exported in the swc)
-		private var dummy:User;
+		private var dummy1:User;
 		private var dummy2:ClassA;
 		private var dummy3:Multiplier;
+		private var dummy4:BrickBreaker;
 		
 		private var userManager:UserManager;
 		

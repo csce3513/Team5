@@ -1,4 +1,5 @@
-﻿package tests {
+﻿package tests
+{
 	
 	import flexunit.framework.Assert;
 	import org.flexunit.assertThat;
@@ -12,13 +13,13 @@
 		{
 			//Tests that the scores starts out as 0
 			var bb : BrickBreaker = new BrickBreaker();
-			assertTrue(bb.getScore() == 0);
-			assertTrue(bb.getBallVelocityX() == 0);
-			assertTrue(bb.getVallVelocityY() == 0);
+			Assert.assertTrue(bb.score == 0);
+			Assert.assertTrue(bb.ballVelocityX == 0);
+			Assert.assertTrue(bb.ballVelocityY == 0);
 		}
 		
 		[Test]
-		public function testBouncingOnTopEdge()
+		public function testBouncingEdge()
 		{
 			//Tests to make sure the ball changes direction
 			//when it hits the top border.
@@ -26,13 +27,10 @@
 			var bb : BrickBreaker = new BrickBreaker();
 			
 			bb.setBallVelocity(1, 1);
-			bb.bounceOnWall();
-			
-			var velX:Number = bb.getBallVelocityX();
-			var velY:Number = bb.getBallVelocityY();
+			bb.bounceOnWall(bb.WALL_TOP);
 			
 			//At least one of the two has to change direction
-			assertTrue(velX < 0 || velY < 0);
+			Assert.assertTrue(bb.ballVelocityY < 0);
 			
 		}
 		
@@ -41,8 +39,8 @@
 		{
 			//Makes sure the game ends if the ball hits the bottom border
 			var bb : BrickBreaker = new BrickBreaker();
-			bb.hitBottomWall();
-			assertTrue(bb.isGameOver());
+			bb.bounceOnWall(bb.WALL_BOTTOM);
+			Assert.assertTrue(bb.gameOver);
 		}
 		
 		[Test]
@@ -50,13 +48,13 @@
 		{
 			//Make sure the score increases when the ball bounces on the paddle
 			var bb : BrickBreaker = new BrickBreaker();
-			var score:Number = bb.getScore();
-			assertTrue(score == 0);
-			bb.bounceOnWall();
-			assertTrue(bb.getScore() > score);
-			score = bb.getScore();
-			bb.bounceOnWall();
-			assertTrue(bb.getScore() > score);
+			var score:Number = bb.score;
+			Assert.assertTrue(score == 0);
+			bb.bounceOnPaddle();
+			Assert.assertTrue(bb.score > score);
+			score = bb.score;
+			bb.bounceOnPaddle();
+			Assert.assertTrue(bb.score > score);
 		}
 		
 		[Test]
@@ -67,20 +65,20 @@
 			var bb : BrickBreaker = new BrickBreaker();
 			
 			
-			bb.setBallVelocity(1, -1);
+			bb.setBallVelocity(0, -1);
 			
 			bb.bounceOnPaddle();
 			
-			var vx:Number = bb.getBallVelocityX();
-			var vy:Number = bb.getBallVelocityY();
+			var vx:Number = bb.ballVelocityX;
+			var vy:Number = bb.ballVelocityY;
 			
 			//Much be going up now
-			assertTrue(vy > 0);
+			Assert.assertTrue(vy > 0);
 			
 			var spd:Number = Math.sqrt(vx*vx + vy*vy);
 			
 			//Speed must have increased
-			assertTrue(spd > 1);
+			Assert.assertTrue(spd > 1);
 			
 		}
 		
