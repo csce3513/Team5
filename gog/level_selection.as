@@ -15,7 +15,9 @@
 		
 		public function level_selection(game : the_game)
 		{
-			brickBreakerButton = new level_thumbnail("Brick Breaker", game);
+			brickBreakerButton = new level_thumbnail("Ricochet", game);
+			
+			brickBreakerButton.y = 50;
 			
 			brickBreakerButton.addEventListener(MouseEvent.CLICK, (function(that) {
 				return function(evt:MouseEvent) {

@@ -12,8 +12,6 @@
 		
 		private var _users : Object;
 		
-		//1046: Type was not found or was not a compile-time constant: File.
-		//Confirmed to break for Tyler and Jon's computer
 		public function UserManager(file : File)
 		{
 			this._users = {};

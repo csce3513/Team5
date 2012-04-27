@@ -36,9 +36,7 @@
 			ballVelocityY = 0;
 			_gameOver = false;
 			
-			if (stage) {
-				addEventListener(Event.ADDED_TO_STAGE, build);
-			}
+			addEventListener(Event.ADDED_TO_STAGE, build);
 			
 		}
 		
