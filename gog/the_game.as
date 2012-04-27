@@ -3,7 +3,6 @@
 	import flash.display.Sprite;
 	import flash.display.MovieClip;
 	
-	import flash.filesystem.*;
 	import gog.User;
 	import gog.ClassA;
 	import gog.Multiplier;
@@ -33,7 +32,7 @@
 		public function the_game()
 		{
 			
-			this.userManager = new UserManager(File.applicationStorageDirectory.resolvePath("users"));
+			this.userManager = new UserManager();
 			show_splash();
 		}
 		
