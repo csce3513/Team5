@@ -1,4 +1,4 @@
-﻿package gog.shapes 
+﻿package gog.Shapes 
 {
 	
 	import flash.display.Sprite;

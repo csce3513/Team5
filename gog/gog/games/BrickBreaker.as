@@ -2,7 +2,7 @@
 {
 	
 	import flash.display.Sprite;
-	import gog.shapes.Circle;
+	import gog.Shapes.Circle;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
