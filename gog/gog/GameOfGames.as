@@ -16,6 +16,12 @@
 			
 			loginScreen = new LoginScreen(userManager);
 			
+			var that = this;
+			
+			loginScreen.addEventListener(LoginEvent.AUTHED, function() {
+				that.removeChild(loginScreen);  
+			});
+			
 			addChild(loginScreen);
 		}
 	

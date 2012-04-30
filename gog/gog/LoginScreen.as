@@ -26,9 +26,7 @@
 						user.setLevel(1);
 						userManager.saveUser(user);
 					}
-					loginButton.visible = false;
-					output.text = (existed) ? "User has been restored" : "User has been created";
-					username.visible = false;
+					dispatchEvent(new LoginEvent(LoginEvent.AUTHED));
 				} else {
 					output.text = "Usernames must be alphanumeric";
 				}
