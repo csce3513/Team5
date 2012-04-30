@@ -1,0 +1,40 @@
+﻿package gog {
+	
+	import flash.display.MovieClip;
+	
+	import flash.display.Sprite;
+	import flash.display.SimpleButton;
+	import flash.events.MouseEvent;
+	
+	public class LoginScreen extends MovieClip
+	{
+		
+		public function LoginScreen(userManager : UserManager)
+		{
+			
+			loginButton.label = "Login";
+			output.text = "";
+			
+			loginButton.addEventListener(MouseEvent.CLICK, function() {
+				var un = username.text;
+				if (un.match(/^[A-Za-z0-9]+$/)) {
+					var user = userManager.getUserByName(un);
+					var existed = (user !== null);
+					if (user === null) {
+						user = new User();
+						user.setName(un);
+						user.setLevel(1);
+						userManager.saveUser(user);
+					}
+					loginButton.visible = false;
+					output.text = (existed) ? "User has been restored" : "User has been created";
+					username.visible = false;
+				} else {
+					output.text = "Usernames must be alphanumeric";
+				}
+			});
+		}
+		
+	}
+	
+}
