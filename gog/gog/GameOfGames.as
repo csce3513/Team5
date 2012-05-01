@@ -1,7 +1,7 @@
 ﻿package gog {
 	
 	import flash.display.MovieClip;
-	import gog.games.Ricochet;
+	import gog.games.*;
 	
 	public class GameOfGames extends MovieClip
 	{
@@ -67,7 +67,12 @@
 				addChild(game);
 				bindGameEvents();
 			} else if (gameName == "ballDodge") {
-
+				game = new BallDodge(userManager);
+				if (getChildByName("gameMenu") != null) {
+					removeChild(gameMenu);
+				}
+				addChild(game);
+				bindGameEvents();
 			}
 		}
 		
