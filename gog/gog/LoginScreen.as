@@ -19,14 +19,13 @@
 				var un = username.text;
 				if (un.match(/^[A-Za-z0-9]+$/)) {
 					var user = userManager.getUserByName(un);
-					var existed = (user !== null);
 					if (user === null) {
 						user = new User();
 						user.setName(un);
 						user.setLevel(1);
 						userManager.saveUser(user);
 					}
-					dispatchEvent(new LoginEvent(LoginEvent.AUTHED));
+					dispatchEvent(new LoginEvent(LoginEvent.AUTHED, user));
 				} else {
 					output.text = "Usernames must be alphanumeric";
 				}

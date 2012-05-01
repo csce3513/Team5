@@ -21,6 +21,10 @@
 			ricochetBall.addEventListener(MouseEvent.CLICK, function() {
 				  dispatchEvent(new GameEvent(GameEvent.INIT, "ricochet"));
 			});
+			
+			hiScoresButton.addEventListener(MouseEvent.CLICK, function() {
+				dispatchEvent(new GameEvent(GameEvent.HISCORES, ""));
+			});
 	
 		}
 		

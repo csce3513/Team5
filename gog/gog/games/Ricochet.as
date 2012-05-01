@@ -13,6 +13,8 @@
 	import gog.Game;
 	import flash.ui.Mouse;
 	import gog.GameEvent;
+	import gog.UserManager;
+	import gog.ScoreEvent;
 	
 	public class Ricochet extends Game
 	{
@@ -33,8 +35,11 @@
 		public const WALL_BOTTOM:int = 3;
 		public const WALL_LEFT:int = 4;
 		
-		public function Ricochet()
+		public function Ricochet(userManager : UserManager)
 		{
+			
+			super(userManager);
+			
 			score = 0;
 			ballVelocityX = 0;
 			ballVelocityY = 0;
@@ -115,7 +120,6 @@
 			if (_startText) {
 				addChild(_startText);
 				_startText.text = 'Game Over!';
-				var that = this;
 				Mouse.show();
 				playAgain.visible = true;
 				backToMenu.visible = true;
@@ -128,6 +132,7 @@
 				_ball.removeEventListener(Event.ENTER_FRAME, moveBall);
 			}
 			
+			dispatchEvent(new ScoreEvent(ScoreEvent.UPDATED, "ricochet", _score));
 			
 			
 		}
@@ -252,7 +257,8 @@
 			
 		}
 		
-		protected function movePaddle(event:Event):void{
+		protected function movePaddle(event:Event):void
+		{
 	
 			//centers paddle on mouse
 			_paddle.x = mouseX - _paddle.width / 2;

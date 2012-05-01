@@ -10,6 +10,8 @@
 		public static const LOST : String = "lost";
 		public static const REPLAY : String = "replay";
 		public static const BACK_MENU : String = "back_menu";
+		public static const HISCORES : String = "hiscores";
+		public static const HISCORES_EXIT : String = "hiscores_exit";
 		
 		private var game : String;
 		

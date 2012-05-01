@@ -9,7 +9,10 @@
 		private var userManager : UserManager;
 		private var loginScreen : LoginScreen;
 		private var gameMenu : GameMenu;
-		private var userName : String;
+		//private var userName : String;
+		private var user : User = null;
+		
+		private var scores : HiscoresMenu;
 		
 		private var game : Game;
 		
@@ -24,13 +27,25 @@
 			
 			var that = this;
 			
-			loginScreen.addEventListener(LoginEvent.AUTHED, function() {
+			loginScreen.addEventListener(LoginEvent.AUTHED, function(evt : LoginEvent) {
+				user = evt.getUser();
 				that.removeChild(loginScreen);
 				that.addChild(gameMenu);
 			});
 			
 			gameMenu.addEventListener(GameEvent.INIT, function(evt : GameEvent) {
 				playGame(evt.getGame());
+			});
+			
+			gameMenu.addEventListener(GameEvent.HISCORES, function() {
+				scores = new HiscoresMenu(userManager, user.getName());
+				removeChild(gameMenu);
+				addChild(scores);
+				scores.addEventListener(GameEvent.HISCORES_EXIT, function() {
+					removeChild(scores);
+				  	scores = null;
+					addChild(gameMenu);
+				});
 			});
 			
 			addChild(loginScreen);
@@ -45,7 +60,7 @@
 		private function playGame(gameName : String)
 		{
 			if (gameName == "ricochet") {
-				game = new Ricochet();
+				game = new Ricochet(userManager);
 				if (getChildByName("gameMenu") != null) {
 					removeChild(gameMenu);
 				}
@@ -65,6 +80,10 @@
 				removeChild(game);
 				game = null;
 				addChild(gameMenu);
+			});
+			game.addEventListener(ScoreEvent.UPDATED, function(evt : ScoreEvent) {
+				user.recordScore(evt.game, evt.score);
+				userManager.saveUser(user);
 			});
 		}
 	
