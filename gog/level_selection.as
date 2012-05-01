@@ -11,7 +11,7 @@
 		public var main_class:the_game;
 		
 		private var brickBreakerButton:level_thumbnail;
-		private var pongButton:level_thumbnail;
+		private var Game2Button:level_thumbnail;
 		
 		private var brickBreaker:BrickBreaker;
 		
@@ -19,22 +19,22 @@
 		{
 			//displays the Ricochet game
 			brickBreakerButton = new level_thumbnail("Ricochet", game);
-			pongButton = new level_thumbnail("Pong",game);
+			Game2Button = new level_thumbnail("Game 2",game);
 			
 			brickBreakerButton.y = 50;
-			pongButton.y = 100;
+			Game2Button.y = 100;
 			
 			brickBreakerButton.addEventListener(MouseEvent.CLICK, (function(that) {
 				return function(evt:MouseEvent) {
 					that.removeChild(brickBreakerButton);
-					that.removeChild(pongButton);
+					that.removeChild(Game2Button);
 					that.brickBreaker = new BrickBreaker();
 					that.addChild(brickBreaker);
 				};
 			}(this)));
 			
 			addChild(brickBreakerButton);
-			addChild(pongButton);
+			addChild(Game2Button);
 		}
 		
 	}
