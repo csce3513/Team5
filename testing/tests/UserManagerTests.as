@@ -5,7 +5,6 @@
 	import org.flexunit.assertThat;
 	import gog.UserManager;
 	import gog.User;
-	import flash.filesystem.File;
 	
 	public class UserManagerTests
 	{
@@ -13,10 +12,8 @@
 		[Test]
 		public function testStoresAndRetrieves()
 		{
-		
-			var f : File = File.applicationStorageDirectory.resolvePath("TestUsers");
 			
-			var um : UserManager = new UserManager(f);
+			var um : UserManager = new UserManager();
 			
 			var u : User = new User();
 			
@@ -28,15 +25,14 @@
 			Assert.assertTrue(users.length == 1);
 			Assert.assertTrue(users[0].getName() == "test");
 			
-			f.deleteFile();
-			
 		}
 		
 		[Test]
 		public function testCorrectCount()
 		{
-			var f : File = File.applicationStorageDirectory.resolvePath("UsersTest");
-			var um : UserManager = new UserManager(f);
+			var um : UserManager = new UserManager();
+			
+			um.clear();
 			
 			var user : User = new User();
 			user.setName("blah");
@@ -52,15 +48,13 @@
 			
 			Assert.assertTrue(um.count() == 2);
 			
-			f.deleteFile();
-			
 		}
 		
 		[Test]
 		public function testGetUserByName()
 		{
-			var f : File = File.applicationStorageDirectory.resolvePath("UsersTest");
-			var um : UserManager = new UserManager(f);
+			
+			var um : UserManager = new UserManager();
 			
 			var u = new User();
 			u.setName("fake");
@@ -72,31 +66,25 @@
 			
 			Assert.assertTrue(fetched.getName() == "fake");
 			
-			f.deleteFile();
-			
 		}
 	
 		[Test]
 		public function testNonExistingUser()
 		{
 			
-			var f : File = File.applicationStorageDirectory.resolvePath("UsersTest");
-			var um : UserManager = new UserManager(f);
+			var um : UserManager = new UserManager();
 			
 			Assert.assertTrue(um.getUserByName("fake") === null);
-
-			if (f.exists) {
-				f.deleteFile();
-			}
 			
 		}
 		
 		[Test]
-		public function setCanClearUsers()
+		public function testCanClearUsers()
 		{
 			
-			var f : File = File.applicationStorageDirectory.resolvePath("UsersTest");
-			var um : UserManager = new UserManager(f);
+			var um : UserManager = new UserManager();
+			
+			um.clear();
 			
 			um.saveUser(new User());
 

@@ -48,7 +48,11 @@
 		public function count() : int
 		{
 			var users = getAllUsers();
-			return users.length;
+			var num : int = 0;
+			for (var u in users) {
+				++num;
+			}
+			return num;
 		}
 		
 		public function getUserByName(name : String) : User

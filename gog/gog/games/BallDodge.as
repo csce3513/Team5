@@ -151,7 +151,7 @@
 			
 		}
 		
-		protected function gameOver()
+		public function gameOver()
 		{
 			teardownGame();
 			if (!getChildByName("startText")) {
@@ -203,6 +203,12 @@
 			ballDodgeScore.text = new String((int) (_score / 3));
 		}
 		
+		public function ballPassed() : void
+		{
+			
+			++_score;
+		}
+		
 		protected function checkCollisions(evt : Event)
 		{
 			
@@ -216,7 +222,7 @@
 							gameOver();
 						} else {
 							if (enemy.y > stage.stageHeight) {
-								++_score;
+								ballPassed();
 								rerenderScore();
 								removeChild(_enemies[en]);
 								_enemies[en] = null;
@@ -225,6 +231,11 @@
 					}
 				} 
 			}
+		}
+		
+		public function getScore() : int
+		{
+			return _score;
 		}
 		
 	}

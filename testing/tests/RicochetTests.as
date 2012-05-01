@@ -3,16 +3,17 @@
 	
 	import flexunit.framework.Assert;
 	import org.flexunit.assertThat;
-	import gog.games.BrickBreaker;
+	import gog.games.Ricochet;
+	import gog.UserManager;
 	
-	public class BrickBreakerTests
+	public class RicochetTests
 	{
 		
 		[Test]
 		public function testInitialState()
 		{
 			//Tests that the scores starts out as 0
-			var bb : BrickBreaker = new BrickBreaker();
+			var bb : Ricochet = new Ricochet(new UserManager());
 			Assert.assertTrue(bb.score == 0);
 			Assert.assertTrue(bb.ballVelocityX == 0);
 			Assert.assertTrue(bb.ballVelocityY == 0);
@@ -24,7 +25,7 @@
 			//Tests to make sure the ball changes direction
 			//when it hits the top border.
 			
-			var bb : BrickBreaker = new BrickBreaker();
+			var bb : Ricochet = new Ricochet(new UserManager());
 			
 			bb.setBallVelocity(1, 1);
 			bb.bounceOnWall(bb.WALL_TOP);
@@ -38,7 +39,7 @@
 		public function testLosingGame()
 		{
 			//Makes sure the game ends if the ball hits the bottom border
-			var bb : BrickBreaker = new BrickBreaker();
+			var bb : Ricochet = new Ricochet(new UserManager());
 			bb.bounceOnWall(bb.WALL_BOTTOM);
 			Assert.assertTrue(bb.gameOver);
 		}
@@ -47,7 +48,7 @@
 		public function testScoreIncreases()
 		{
 			//Make sure the score increases when the ball bounces on the paddle
-			var bb : BrickBreaker = new BrickBreaker();
+			var bb : Ricochet = new Ricochet(new UserManager());
 			var score:Number = bb.score;
 			Assert.assertTrue(score == 0);
 			bb.bounceOnPaddle();
@@ -62,7 +63,7 @@
 		{
 			//Makes sure the ball changes direction and increases speed
 			//when it hits the paddle.
-			var bb : BrickBreaker = new BrickBreaker();
+			var bb : Ricochet = new Ricochet(new UserManager());
 			
 			
 			bb.setBallVelocity(0, -1);
