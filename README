@@ -1,0 +1,4 @@
+- Open the project in Flash CS4
+- If prompted, choose to pick a new project root. Choose the testing folder (the folder this file is in) as the root.
+- Right click on the fla file and click "Make Default Document"
+- Click "Test Project" (or if that option doesn't show up, open the fla file, then choose the control option at the top of the window and then Test)
