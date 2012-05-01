@@ -27,6 +27,7 @@
 			brickBreakerButton.addEventListener(MouseEvent.CLICK, (function(that) {
 				return function(evt:MouseEvent) {
 					that.removeChild(brickBreakerButton);
+					that.removeChild(pongButton);
 					that.brickBreaker = new BrickBreaker();
 					that.addChild(brickBreaker);
 				};
