@@ -9,6 +9,7 @@
 	public class RicochetTests
 	{
 		
+		//Makes sure the game is setup initially correctly
 		[Test]
 		public function testInitialState()
 		{
@@ -19,6 +20,7 @@
 			Assert.assertTrue(bb.ballVelocityY == 0);
 		}
 		
+		//makes sure bouncing on edges is handled correctly
 		[Test]
 		public function testBouncingEdge()
 		{
@@ -35,6 +37,7 @@
 			
 		}
 		
+		//makes sure that the game ends on certain conditions
 		[Test]
 		public function testLosingGame()
 		{
@@ -44,6 +47,7 @@
 			Assert.assertTrue(bb.gameOver);
 		}
 		
+		//Makes sure the score increases when the ball bounces on the paddle
 		[Test]
 		public function testScoreIncreases()
 		{
@@ -58,6 +62,8 @@
 			Assert.assertTrue(bb.score > score);
 		}
 		
+		//Makes sure that the ball's velocity is properly changed when
+		//it bounces on the paddle and also that its speed increases
 		[Test]
 		public function testBouncingOnPaddle()
 		{

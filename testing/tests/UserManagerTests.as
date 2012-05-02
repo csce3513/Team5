@@ -9,6 +9,7 @@
 	public class UserManagerTests
 	{
 
+		//Tests to make sure that users can be stored and retrieved
 		[Test]
 		public function testStoresAndRetrieves()
 		{
@@ -27,6 +28,7 @@
 			
 		}
 		
+		//Makes sure that the count() method returns the correct number
 		[Test]
 		public function testCorrectCount()
 		{
@@ -50,6 +52,7 @@
 			
 		}
 		
+		//Test to make sure User objects can be fetched by name
 		[Test]
 		public function testGetUserByName()
 		{
@@ -68,6 +71,7 @@
 			
 		}
 	
+		//Tests to make sure that non-existing users return null when searched for
 		[Test]
 		public function testNonExistingUser()
 		{
@@ -78,6 +82,7 @@
 			
 		}
 		
+		//Tests that clear() properly erases all users
 		[Test]
 		public function testCanClearUsers()
 		{

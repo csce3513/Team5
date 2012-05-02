@@ -9,6 +9,7 @@
 	public class BallDodgeTests
 	{
 		
+		//Tests that the game has the correct intiial state
 		[Test]
 		public function testInitialState()
 		{
@@ -17,6 +18,7 @@
 			Assert.assertTrue(bd.getScore() == 0);
 		}
 		
+		//Makes sure the score increases when a ball is dodged (passes off the screen)
 		[Test]
 		public function testScoreIncrease()
 		{
@@ -25,6 +27,7 @@
 			Assert.assertTrue(bd.getScore() > 0);
 		}
 		
+		//Makes sure the proper events and conditions occur when the game should end
 		[Test]
 		public function testGameOver()
 		{
